@@ -13,6 +13,9 @@ public class OuterGround : MonoBehaviour
     [SerializeField] private float ShrinkSpeed = 10f;
     [SerializeField] private float ShrinkAmount = 10f;
     [SerializeField] private float DistanceOffset = 1f;
+
+    [Header("Timer Setttings")]
+    [SerializeField] private bool isTimerActive = true;
     [SerializeField] private float InvokeTime = 10f;
     [SerializeField] private float Timer = 10f;
 
@@ -40,8 +43,14 @@ public class OuterGround : MonoBehaviour
         ShrinkGround();
         TimerUpdater();
     }
+    private void LateUpdate()
+    {
+        ScaleCheck();
+    }
     private void TimerUpdater() // Updates timer //  - Could have used Invoke Repeating -
     {
+        if (!isTimerActive) { return; } // if timer is not active stop executing this function/method //
+        
         Timer -= Time.deltaTime;
 
         if(Timer <= 0)
@@ -94,6 +103,13 @@ public class OuterGround : MonoBehaviour
         else if (_instance == null)
         {
             _instance = this;
+        }
+    }
+    private void ScaleCheck()
+    {
+        if(transform.localScale.x < 0.1)
+        {
+            isTimerActive = false;
         }
     }
 }
