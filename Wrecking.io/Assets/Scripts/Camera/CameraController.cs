@@ -39,7 +39,6 @@ public class CameraController : MonoBehaviour
         else
         {
             _instance = this;
-
         }
     }
     private void TailTarget()
@@ -47,6 +46,6 @@ public class CameraController : MonoBehaviour
         if (Target == null) { return; } // if the target is destroyed return //
         targetPosition = Target.position + Offset;
         camTransform.position = Vector3.SmoothDamp(transform.position,targetPosition,ref velocity,SmoothTime);
-        transform.LookAt(camTransform);
+        transform.LookAt(Target);
     }
 }

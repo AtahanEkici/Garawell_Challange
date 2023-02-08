@@ -1,10 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
-
 public class CarRider : MonoBehaviour
 {
     [Header("Axle Container")]
     [SerializeField] public List<AxleInfo> axleInfos;
+
+    [Header("Local Components")]
+    [SerializeField] private Rigidbody rb;
 
     [Header("Wheel Colliders")]
     [SerializeField] private WheelCollider[] LeftWheels = new WheelCollider[2];
@@ -18,15 +20,18 @@ public class CarRider : MonoBehaviour
     [SerializeField] private bool isFlipped = false;
     [SerializeField] private float FlipSpeed = 10f;
     [SerializeField] private float StoppingAngle = 5f;
-    //[SerializeField] private float FlippingActivationAngle = 165f;
     [SerializeField] private Quaternion initialRotation = Quaternion.identity;
     [SerializeField] private float FlippedTimer = 1f;
     [SerializeField] private float counter = 1f;
 
     [Header("Wheel Hit")]
     [SerializeField] private WheelHit hit;
+
+    [Header("Fall Threshold")]
+    [SerializeField] private float FallThreshold = -15f;
     private void Awake()
     {
+        rb = GetComponent<Rigidbody>();
         initialRotation = transform.rotation;
         LeftWheels = new WheelCollider[axleInfos.Count];
         RightWheels = new WheelCollider[axleInfos.Count];
@@ -44,6 +49,7 @@ public class CarRider : MonoBehaviour
     {
         DetectFlipped();
         FlipCar();
+        DetectFall();
     }
     private void Movement() // Basic Car Movement Script //
     {
@@ -76,8 +82,6 @@ public class CarRider : MonoBehaviour
     {
         if (!isFlipped) { return; }
 
-        //Debug.Log("Flipping Back");
-
         transform.rotation = Quaternion.Lerp(transform.rotation, initialRotation,Time.deltaTime * FlipSpeed);
 
         if(Quaternion.Angle(transform.rotation, initialRotation) < StoppingAngle)
@@ -88,7 +92,7 @@ public class CarRider : MonoBehaviour
     }
     private void DetectFlipped()
     {
-        if (isFlipped) { return; }
+        if (isFlipped) { counter = FlippedTimer; return; }
 
         int total_hits = 0;
 
@@ -108,29 +112,25 @@ public class CarRider : MonoBehaviour
         {
             counter -= Time.deltaTime;
 
-            Vector3 pos = transform.position;
-            transform.position = new(pos.x, pos.y + (Time.deltaTime) , pos.z);
-
             if (counter <= 0)
             {
                 isFlipped = true;
+                rb.AddRelativeForce(Vector3.up,ForceMode.Impulse); // Levitate the car a bit //
                 counter = FlippedTimer;
             }
         }
-
-        /*
-         *  Retracted because of steering issues will try to use listening wheel colliders 
-        if (Mathf.Abs(transform.eulerAngles.x) >= FlippingActivationAngle)
+    }
+    private void DetectFall()
+    {
+        if (transform.position.y <= FallThreshold)
         {
-            counter -= Time.deltaTime;
-            
-            if(counter <= 0)
-            {
-                isFlipped = true;
-                counter = FlippedTimer;
-            }
+            Destroy(this);
+            // Game Over //
         }
-        */
+    }
+    private void OnDestroy()
+    {
+        Debug.Log(gameObject.name+ " destroyed");
     }
 }
 [System.Serializable]
