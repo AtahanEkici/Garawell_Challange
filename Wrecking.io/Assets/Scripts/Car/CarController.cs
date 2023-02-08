@@ -123,6 +123,7 @@ public class CarController : MonoBehaviour
     private void OnDestroy()
     {
         Debug.Log(gameObject.name+" destroyed");
+        main_camera.transform.parent = null;
     }
     private void OnCollisionEnter(Collision collision)
     {

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     private static CameraController _instance;
@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Transform camTransform;
     [SerializeField] private float SmoothTime = 0.150f;
     [SerializeField] private Vector3 Offset = new(0,0,0);
+    [SerializeField] private Quaternion InitialRotation = Quaternion.identity;
 
     [Header("Camera Target")]
     [SerializeField] private Transform Target;
@@ -19,6 +20,11 @@ public class CameraController : MonoBehaviour
         CheckInstance();
         Target = GameObject.FindGameObjectWithTag(PlayerTag).transform;
         camTransform = transform;
+        InitialRotation = transform.rotation;
+    }
+    private void Start()
+    {
+        //transform.parent = Target;
     }
     private void LateUpdate()
     {
@@ -40,7 +46,7 @@ public class CameraController : MonoBehaviour
     {
         if (Target == null) { return; } // if the target is destroyed return //
         targetPosition = Target.position + Offset;
-        camTransform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, SmoothTime);
+        camTransform.position = Vector3.SmoothDamp(transform.position,targetPosition,ref velocity,SmoothTime);
         transform.LookAt(camTransform);
     }
 }
