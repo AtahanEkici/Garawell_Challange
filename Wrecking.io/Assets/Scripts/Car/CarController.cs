@@ -15,6 +15,7 @@ public class CarController : MonoBehaviour
 
     [Header("Local Componenet References")]
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private float mass;
 
     [Header("Movement Settings")]
     [SerializeField] private float MoveSpeed = 10f;
@@ -22,11 +23,12 @@ public class CarController : MonoBehaviour
     [SerializeField] private float MinSpeed = 0f;
 
     [Header("ForceMode")]
-    [SerializeField]private ForceMode forcemode = ForceMode.Acceleration;
+    [SerializeField]private ForceMode forcemode = ForceMode.Force;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        mass = rb.mass;
     }
     private void Start()
     {
@@ -34,18 +36,16 @@ public class CarController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        AlternateMovement();
+        //AlternateMovement();
     }
     private void Update()
     {
         CheckFall();
-        GetInitialPosition();
-        Debug.Log("Position: "+transform.position+"");
-        Debug.Log("Position: " + transform.forward + "");
-        Debug.DrawRay(transform.position, transform.forward * Mathf.Infinity, Color.green);
+        TestMovement();
     }
     private void LateUpdate()
     {
+        GetInitialPosition();
         SpeedCheck();
     }
     private void Movement()
@@ -72,11 +72,23 @@ public class CarController : MonoBehaviour
     {
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
-       // if (x == 0 && y == 0) { return; }
+        // if (x == 0 && y == 0) { return; }
 
-        Vector3 moveBy = (Vector3.right * y) + (x * (Vector3.forward));
-       
-        rb.AddForce(MoveSpeed * moveBy * Time.fixedDeltaTime, forcemode);
+        Vector3 forwardMove = Vector3.right * x;
+
+        Vector3 moveBy = forwardMove;
+        rb.AddForce(mass * MoveSpeed * Time.fixedDeltaTime * moveBy, forcemode);
+    }
+    private void TestMovement()
+    {
+        float x = Input.GetAxis("Horizontal");
+        float y = Input.GetAxis("Vertical");
+        if (y == 0) { return; }
+
+        Vector3 forward =-x * transform.forward;
+        Vector3 side = y * transform.right;
+        Vector3 moveBy = side + forward;
+        transform.Translate(MoveSpeed * Time.deltaTime * moveBy.normalized);
     }
     private void GetInitialPosition()
     {
