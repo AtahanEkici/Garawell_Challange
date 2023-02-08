@@ -351,6 +351,8 @@
 "Assets/Scripts/Ground/GroundController.cs"
 "Assets/Scripts/Ground/InnerGround.cs"
 "Assets/Scripts/Ground/OuterGround.cs"
+"Assets/Scripts/Management/GameManager.cs"
+"Assets/Scripts/Management/LevelManager.cs"
 -langversion:9.0
 
 /deterministic

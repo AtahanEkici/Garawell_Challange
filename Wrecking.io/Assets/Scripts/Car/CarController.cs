@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class CarController : MonoBehaviour
 {
@@ -22,23 +21,28 @@ public class CarController : MonoBehaviour
     [SerializeField] private float MaxSpeed = 20f;
     [SerializeField] private float MinSpeed = 0f;
 
+    [Header("ForceMode")]
+    [SerializeField]private ForceMode forcemode = ForceMode.Acceleration;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        main_camera = Camera.main;
     }
     private void Start()
     {
-        
+        main_camera = Camera.main;
     }
     private void FixedUpdate()
     {
-        Movement();
+        AlternateMovement();
     }
     private void Update()
     {
         CheckFall();
         GetInitialPosition();
+        Debug.Log("Position: "+transform.position+"");
+        Debug.Log("Position: " + transform.forward + "");
+        Debug.DrawRay(transform.position, transform.forward * Mathf.Infinity, Color.green);
     }
     private void LateUpdate()
     {
@@ -56,13 +60,23 @@ public class CarController : MonoBehaviour
 
         //Debug.DrawRay(transform.position,WorldCurrent * 200f, Color.green,1f);
         //Debug.DrawRay(transform.position, WorldInitial * 200f, Color.magenta,1f);
-        Debug.DrawLine(WorldInitial, WorldCurrent * Mathf.Infinity, Color.red,1f);
+        //Debug.DrawLine(WorldInitial, WorldCurrent * Mathf.Infinity, Color.red,1f);
 
-        float distance = Vector2.Distance(InitialMousePos, CurrentMousePos);
+        float distance = Vector2.Distance(WorldInitial, WorldCurrent);
 
         //rb.AddForce();
 
         Debug.Log("Distance: "+distance+"");
+    }
+    private void AlternateMovement()
+    {
+        float x = Input.GetAxis("Horizontal");
+        float y = Input.GetAxis("Vertical");
+       // if (x == 0 && y == 0) { return; }
+
+        Vector3 moveBy = (Vector3.right * y) + (x * (Vector3.forward));
+       
+        rb.AddForce(MoveSpeed * moveBy * Time.fixedDeltaTime, forcemode);
     }
     private void GetInitialPosition()
     {

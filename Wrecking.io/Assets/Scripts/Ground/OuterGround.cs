@@ -107,9 +107,11 @@ public class OuterGround : MonoBehaviour
     }
     private void ScaleCheck()
     {
-        if(transform.localScale.x < 0.1)
+        if(transform.localScale.x <= 0.1)
         {
             isTimerActive = false;
+            transform.localScale = Vector3.zero;
+            Destroy(this);
         }
     }
 }

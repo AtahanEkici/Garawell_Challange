@@ -22,9 +22,7 @@ public class CameraController : MonoBehaviour
     }
     private void LateUpdate()
     {
-        targetPosition = Target.position + Offset;
-        camTransform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, SmoothTime);
-        transform.LookAt(camTransform);
+        TailTarget();
     }
     private void CheckInstance()
     {
@@ -37,5 +35,12 @@ public class CameraController : MonoBehaviour
             _instance = this;
 
         }
+    }
+    private void TailTarget()
+    {
+        if (Target == null) { return; } // if the target is destroyed return //
+        targetPosition = Target.position + Offset;
+        camTransform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, SmoothTime);
+        transform.LookAt(camTransform);
     }
 }
