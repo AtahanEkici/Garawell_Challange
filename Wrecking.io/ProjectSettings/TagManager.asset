@@ -8,6 +8,7 @@ TagManager:
   - Car
   - Wheel
   - Light
+  - UI
   layers:
   - Default
   - TransparentFX

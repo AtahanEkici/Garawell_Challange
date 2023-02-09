@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 public class CarRider : MonoBehaviour
 {
+    private static readonly string GroundTag = "Ground";
+
     [Header("Axle Container")]
     [SerializeField] public List<AxleInfo> axleInfos;
 
@@ -29,6 +31,11 @@ public class CarRider : MonoBehaviour
 
     [Header("Fall Threshold")]
     [SerializeField] private float FallThreshold = -15f;
+
+    [Header("Ray Attributes")]
+    [SerializeField] private Vector3 RayDirection = Vector3.down;
+    [SerializeField] private float VectorLenght = 2f;
+    [SerializeField] private RaycastHit RayCastHit;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -50,6 +57,7 @@ public class CarRider : MonoBehaviour
         DetectFlipped();
         FlipCar();
         DetectFall();
+        Debug.DrawRay(transform.position,(Vector3.down * VectorLenght), Color.blue);
     }
     private void Movement() // Basic Car Movement Script //
     {
@@ -108,8 +116,12 @@ public class CarRider : MonoBehaviour
             }
         }
 
-        if( total_hits > RightWheels.Length + 1)
+        if(total_hits >= RightWheels.Length)
         {
+            Physics.Raycast(transform.position, RayDirection, out RayCastHit, VectorLenght); // Cast a raycast to see if the car is levitating
+
+            if (RayCastHit.collider.gameObject.CompareTag(GroundTag)) { return; }
+
             counter -= Time.deltaTime;
 
             if (counter <= 0)

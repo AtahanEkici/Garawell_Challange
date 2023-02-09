@@ -161,6 +161,8 @@ MonoBehaviour:
   FlippedTimer: 2
   counter: 2
   FallThreshold: -15
+  RayDirection: {x: 0, y: -1, z: 0}
+  VectorLenght: 2
 --- !u!1 &331836772
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,7 +178,7 @@ GameObject:
   - component: {fileID: 331836777}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -514,7 +516,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -707,7 +709,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6193528702100703051, guid: 56e461fe1f913d24eb035dad6df2e4dd, type: 3}
       propertyPath: m_Mass
-      value: 1000
+      value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 6193528702100703051, guid: 56e461fe1f913d24eb035dad6df2e4dd, type: 3}
       propertyPath: m_Interpolate
