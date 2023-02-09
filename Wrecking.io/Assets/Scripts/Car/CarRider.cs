@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 public class CarRider : MonoBehaviour
 {
-    private static readonly string GroundTag = "Ground";
+    //private static readonly string GroundTag = "Ground";
 
     [Header("Instance ID Given by LevelManager")]
     [SerializeField] private int Instance_ID;
@@ -23,8 +23,11 @@ public class CarRider : MonoBehaviour
 
     [Header("Flip Controlls")]
     [SerializeField] private bool isFlipped = false;
+    [SerializeField] private float FlipForceMultiplier = 1f;
+    [SerializeField] private ForceMode FlipForceMode = ForceMode.Impulse;
     [SerializeField] private float FlipSpeed = 10f;
-    [SerializeField] private float StoppingAngle = 5f;
+    [SerializeField] private float StoppingAngle = 1f;
+    [SerializeField] private float StartingAngle = 45;
     [SerializeField] private Quaternion initialRotation = Quaternion.identity;
     [SerializeField] private float FlippedTimer = 1f;
     [SerializeField] private float counter = 1f;
@@ -34,11 +37,6 @@ public class CarRider : MonoBehaviour
 
     [Header("Fall Threshold")]
     [SerializeField] private float FallThreshold = -15f;
-
-    [Header("Ray Attributes")]
-    [SerializeField] private Vector3 RayDirection = Vector3.down;
-    [SerializeField] private float VectorLenght = 2f;
-    [SerializeField] private RaycastHit RayCastHit;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -55,21 +53,23 @@ public class CarRider : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Movement();
+        KeyboardMovement();
     }
     private void Update()
     {
         DetectFlipped();
         FlipCar();
         DetectFall();
-        Debug.DrawRay(transform.position,(Vector3.down * VectorLenght), Color.blue);
     }
-    private void Movement() // Basic Car Movement Script //
+    private void KeyboardMovement() // Basic Car Movement Script //
     {
-        float motor = maxMotorTorque * Input.GetAxis("Vertical");
-        float steering = maxSteeringAngle * Input.GetAxis("Horizontal");
+        float x = Input.GetAxis("Vertical");
+        float y = Input.GetAxis("Horizontal");
 
-        for (int i=0;i< axleInfos.Count;i++)
+        float motor = maxMotorTorque * x;
+        float steering = maxSteeringAngle * y;
+
+        for (int i=0;i<axleInfos.Count;i++)
         {
             if (axleInfos[i].steering)
             {
@@ -121,28 +121,25 @@ public class CarRider : MonoBehaviour
             }
         }
 
-        if(total_hits >= RightWheels.Length)
+        if(total_hits >= RightWheels.Length && Mathf.Abs(transform.rotation.eulerAngles.x) < StartingAngle)
         {
-            Physics.Raycast(transform.position, RayDirection, out RayCastHit, VectorLenght); // Cast a raycast to see if the car is levitating
-
-            if (RayCastHit.collider.gameObject.CompareTag(GroundTag)) { return; }
-
             counter -= Time.deltaTime;
 
             if (counter <= 0)
             {
+                rb.AddRelativeForce(Vector3.up * FlipForceMultiplier, FlipForceMode); // Levitate the car a bit //
                 isFlipped = true;
-                rb.AddRelativeForce(Vector3.up,ForceMode.Impulse); // Levitate the car a bit //
                 counter = FlippedTimer;
             }
         }
+        
     }
     private void DetectFall()
     {
         if (transform.position.y <= FallThreshold)
         {
             Destroy(this);
-            // Game Over //
+            // Game Over Screen //
         }
     }
     private void OnDestroy()

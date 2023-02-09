@@ -40,7 +40,6 @@ public class InnerGround : MonoBehaviour
         WantedScale = new(x - ShrinkAmount, y, z - ShrinkAmount);
         transform.localScale = Vector3.Lerp(transform.localScale, WantedScale, Time.deltaTime * ShrinkSpeed);
         float distance = Vector3.Distance(transform.localScale, WantedScale);
-        //Debug.Log(distance);
 
         if (distance <= DistanceOffset) // Lerp Stopper //
         {

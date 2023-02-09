@@ -9,6 +9,7 @@ TagManager:
   - Wheel
   - Light
   - UI
+  - Ball
   layers:
   - Default
   - TransparentFX
