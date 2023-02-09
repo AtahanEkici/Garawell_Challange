@@ -4,6 +4,9 @@ public class CarRider : MonoBehaviour
 {
     private static readonly string GroundTag = "Ground";
 
+    [Header("Instance ID Given by LevelManager")]
+    [SerializeField] private int Instance_ID;
+
     [Header("Axle Container")]
     [SerializeField] public List<AxleInfo> axleInfos;
 
@@ -43,6 +46,8 @@ public class CarRider : MonoBehaviour
         LeftWheels = new WheelCollider[axleInfos.Count];
         RightWheels = new WheelCollider[axleInfos.Count];
         GetWheelColliders();
+        Instance_ID = gameObject.GetInstanceID();
+        LevelManager.AddList(gameObject);
     }
     private void Start()
     {
@@ -142,7 +147,7 @@ public class CarRider : MonoBehaviour
     }
     private void OnDestroy()
     {
-        Debug.Log(gameObject.name+ " destroyed");
+        LevelManager.RemoveFromList(Instance_ID);
     }
 }
 [System.Serializable]
