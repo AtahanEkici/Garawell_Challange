@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour
     {
         //transform.parent = Target;
     }
-    private void LateUpdate()
+    private void Update()
     {
         TailTarget();
     }
