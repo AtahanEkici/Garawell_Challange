@@ -18,12 +18,12 @@ public class LevelManager : MonoBehaviour
     }
     private void Update()
     {
-        //CheckWinner();
+        CheckWinner();
     }
     public static void AddList(GameObject addition)
     {
         Cars.Add(addition);
-        Debug.Log("Added " + addition + "");
+        //Debug.Log("Added " + addition + "");
     }
     public static void RemoveFromList(int Instance_ID)
     {

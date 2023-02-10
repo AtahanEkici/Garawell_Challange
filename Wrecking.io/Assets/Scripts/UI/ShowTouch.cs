@@ -33,17 +33,26 @@ public class ShowTouch : MonoBehaviour
     private void Update()
     {
         TrackMouse();
-        GetInitialPosition(); 
+        GetInitialPosition();
+        GetMouseAxis();
     }
     private void LateUpdate()
     {
-        MoveTouchObjects();
-        GetMouseAxis();
+        MoveTouchObjects();    
     }
     public static void GetMouseAxis()
     {
-        MouseControllerAxis = (MousePosition - InitialMousePosition).normalized;
-        MouseControllerAxis = new(MouseControllerAxis.y, MouseControllerAxis.x);
+        bool MouseHeldDown = Input.GetMouseButton(0);
+
+        if (!MouseHeldDown)
+        {
+            MouseControllerAxis = Vector2.zero; 
+        }
+        else if(MouseHeldDown)
+        {
+            MouseControllerAxis = (MousePosition - InitialMousePosition).normalized;
+            MouseControllerAxis = new(MouseControllerAxis.y, MouseControllerAxis.x);
+        }      
     }
     private void GetTouchVirtualizationAssets()
     {

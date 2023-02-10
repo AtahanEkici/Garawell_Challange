@@ -64,19 +64,17 @@ public class CarRider : MonoBehaviour
     }
     private void MouseMovement()
     {
-        if (!Input.GetMouseButton(0)) { return; }
-
         Vector2 MousePos = ShowTouch.MouseControllerAxis;
         float x = MousePos.x;
         float y = MousePos.y;
 
-        Debug.Log("X: " + x + " Y: " + y + "");
+        //Debug.Log("X: " + x + " Y: " + y + "");
 
         float motor = maxMotorTorque * x;
         float steering = maxSteeringAngle * y;
 
-        Debug.Log("(Mouse)Motor: " + motor + "");
-        Debug.Log("(Mouse)Steering: " + steering + "");
+        //Debug.Log("(Mouse)Motor: " + motor + "");
+        //Debug.Log("(Mouse)Steering: " + steering + "");
 
         for (int i = 0; i < axleInfos.Count; i++)
         {

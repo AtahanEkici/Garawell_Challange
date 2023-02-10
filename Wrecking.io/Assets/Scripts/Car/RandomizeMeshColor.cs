@@ -10,7 +10,6 @@ public class RandomizeMeshColor : MonoBehaviour
     }
     void Start()
     {
-        Debug.Log("RAndom Colorizer Destroyed on object: "+gameObject.name+"");
         Destroy(this);
     }
 }
