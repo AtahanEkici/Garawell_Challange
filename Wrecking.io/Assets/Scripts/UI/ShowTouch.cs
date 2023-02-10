@@ -1,9 +1,6 @@
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
-using static UnityEngine.ParticleSystem;
-
 public class ShowTouch : MonoBehaviour
 {
     private static readonly string AssetLocation = "Assets/Prefabs/UI";
@@ -13,22 +10,21 @@ public class ShowTouch : MonoBehaviour
     [SerializeField] private GameObject[] GameObjects;
 
     [Header("Mouse Position")]
-    [SerializeField] private Vector2 MousePosition; 
+    [SerializeField] private static Vector2 MousePosition; 
 
     [Header("Circle")]
     [SerializeField] private GameObject Circle;
     [SerializeField] private static readonly string CircleName = "Circle";
-    [SerializeField] private Vector2 InitialMousePosition;
+    [SerializeField] private static Vector2 InitialMousePosition;
 
     [Header("Touch pointer")]
     [SerializeField] private GameObject Touch;
     [SerializeField] private static readonly string TouchName = "Touch";
     [SerializeField] private float MaxDistance;
-    [SerializeField] Vector2 allowedPos;
+    [SerializeField] private Vector2 allowedPos;
 
-
-
-
+    [Header("Controller Axis'")]
+    [SerializeField]public static Vector2 MouseControllerAxis;
     private void Awake()
     {
         GetTouchVirtualizationAssets();
@@ -42,6 +38,12 @@ public class ShowTouch : MonoBehaviour
     private void LateUpdate()
     {
         MoveTouchObjects();
+        GetMouseAxis();
+    }
+    public static void GetMouseAxis()
+    {
+        MouseControllerAxis = (MousePosition - InitialMousePosition).normalized;
+        MouseControllerAxis = new(MouseControllerAxis.y, MouseControllerAxis.x);
     }
     private void GetTouchVirtualizationAssets()
     {

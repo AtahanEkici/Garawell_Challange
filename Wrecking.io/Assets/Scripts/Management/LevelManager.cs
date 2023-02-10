@@ -18,7 +18,7 @@ public class LevelManager : MonoBehaviour
     }
     private void Update()
     {
-        CheckWinner();
+        //CheckWinner();
     }
     public static void AddList(GameObject addition)
     {

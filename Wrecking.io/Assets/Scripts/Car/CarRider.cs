@@ -53,7 +53,8 @@ public class CarRider : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        KeyboardMovement();
+        MouseMovement();
+        //KeyboardMovement();
     }
     private void Update()
     {
@@ -61,15 +62,51 @@ public class CarRider : MonoBehaviour
         FlipCar();
         DetectFall();
     }
+    private void MouseMovement()
+    {
+        if (!Input.GetMouseButton(0)) { return; }
+
+        Vector2 MousePos = ShowTouch.MouseControllerAxis;
+        float x = MousePos.x;
+        float y = MousePos.y;
+
+        Debug.Log("X: " + x + " Y: " + y + "");
+
+        float motor = maxMotorTorque * x;
+        float steering = maxSteeringAngle * y;
+
+        Debug.Log("(Mouse)Motor: " + motor + "");
+        Debug.Log("(Mouse)Steering: " + steering + "");
+
+        for (int i = 0; i < axleInfos.Count; i++)
+        {
+            if (axleInfos[i].steering)
+            {
+                axleInfos[i].leftWheel.steerAngle = steering;
+                axleInfos[i].rightWheel.steerAngle = steering;
+            }
+            if (axleInfos[i].motor)
+            {
+                axleInfos[i].leftWheel.motorTorque = motor;
+                axleInfos[i].rightWheel.motorTorque = motor;
+            }
+        }
+
+    }
     private void KeyboardMovement() // Basic Car Movement Script //
     {
         float x = Input.GetAxis("Vertical");
         float y = Input.GetAxis("Horizontal");
 
+        Debug.Log("X: " + x + " Y: " + y + "");
+
         float motor = maxMotorTorque * x;
         float steering = maxSteeringAngle * y;
 
-        for (int i=0;i<axleInfos.Count;i++)
+        Debug.Log("(KeyBoard)Motor: " + motor + "");
+        Debug.Log("(KeyBoard)Steering: " + steering + "");
+
+        for (int i = 0; i < axleInfos.Count; i++)
         {
             if (axleInfos[i].steering)
             {
@@ -95,7 +132,9 @@ public class CarRider : MonoBehaviour
     {
         if (!isFlipped) { return; }
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, initialRotation,Time.deltaTime * FlipSpeed);
+        Quaternion rotation = Quaternion.Lerp(transform.rotation, initialRotation, Time.deltaTime * FlipSpeed);
+
+        rb.MoveRotation(rotation);
 
         if(Quaternion.Angle(transform.rotation, initialRotation) < StoppingAngle)
         {
