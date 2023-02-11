@@ -21,7 +21,7 @@ public class Test : MonoBehaviour
 
     void Update()
     {
-        DrawRays();
+        //DrawRays();
         //Move();
     }
 

@@ -355,6 +355,7 @@
 "Assets/Scripts/Car/CarRider.cs"
 "Assets/Scripts/Car/RandomizeMeshColor.cs"
 "Assets/Scripts/Car/RopeBehaviour.cs"
+"Assets/Scripts/Car/Spin.cs"
 "Assets/Scripts/Ground/GroundController.cs"
 "Assets/Scripts/Ground/InnerGround.cs"
 "Assets/Scripts/Ground/OuterGround.cs"
@@ -362,6 +363,7 @@
 "Assets/Scripts/Management/LevelManager.cs"
 "Assets/Scripts/NavMesh/UpdateNavMesh.cs"
 "Assets/Scripts/Rope/DrawRope.cs"
+"Assets/Scripts/Test/ObjectRotator.cs"
 "Assets/Scripts/Test/Test.cs"
 "Assets/Scripts/UI/ShowTouch.cs"
 -langversion:9.0

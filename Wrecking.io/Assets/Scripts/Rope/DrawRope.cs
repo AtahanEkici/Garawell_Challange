@@ -33,6 +33,7 @@ public class DrawRope : MonoBehaviour
     }
     private void UpdatePositions()
     {
+        if(StartPos == null || endPos == null) { return; }
         lr.SetPosition(0, StartPos.position);
         lr.SetPosition(1, endPos.position);
     }
