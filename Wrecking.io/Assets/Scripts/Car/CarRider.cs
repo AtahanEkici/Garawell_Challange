@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+
 public class CarRider : MonoBehaviour
 {
     //private static readonly string GroundTag = "Ground";
@@ -20,6 +21,7 @@ public class CarRider : MonoBehaviour
     [Header("Controlls for the car")]
     [SerializeField] public float maxMotorTorque;
     [SerializeField] public float maxSteeringAngle;
+    [SerializeField] public float maxBrakeTorque;
 
     [Header("Flip Controlls")]
     [SerializeField] private bool isFlipped = false;
@@ -31,6 +33,13 @@ public class CarRider : MonoBehaviour
     [SerializeField] private Quaternion initialRotation = Quaternion.identity;
     [SerializeField] private float FlippedTimer = 1f;
     [SerializeField] private float counter = 1f;
+
+    [Header("Spin Controlls")]
+    [SerializeField] private bool SpinRequested = false;
+    [SerializeField] private Quaternion targetRelativeRotation = Quaternion.Euler(0f, 360f, 0f);
+    [SerializeField] private Quaternion targetRotation = Quaternion.identity;
+    [SerializeField] private float rotationSpeed = 360f;
+    [SerializeField] private float FlipStoppingAngle = 1f;
 
     [Header("Wheel Hit")]
     [SerializeField] private WheelHit hit;
@@ -53,6 +62,7 @@ public class CarRider : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        SpinCar();
         MouseMovement();
         //KeyboardMovement();
     }
@@ -61,11 +71,18 @@ public class CarRider : MonoBehaviour
         DetectFlipped();
         FlipCar();
         DetectFall();
+        DetectSpinRequest();
+        /*
+        Vector2 MousePos = ShowTouch.MouseControllerAxis;
+        Vector2 forward = new(transform.forward.x, transform.forward.z);
+        Debug.DrawRay(transform.position, (MousePos+forward).normalized * 20f, Color.cyan);
+        */
     }
     private void MouseMovement()
     {
         Vector2 MousePos = ShowTouch.MouseControllerAxis;
-        float x = MousePos.x;
+
+        float x = MousePos.x ;
         float y = MousePos.y;
 
         //Debug.Log("X: " + x + " Y: " + y + "");
@@ -78,6 +95,17 @@ public class CarRider : MonoBehaviour
 
         for (int i = 0; i < axleInfos.Count; i++)
         {
+            if (x == 0 && y == 0) // if the mouse is not held down activate the brakes of the car //
+            {
+                axleInfos[i].leftWheel.brakeTorque = maxBrakeTorque;
+                axleInfos[i].rightWheel.brakeTorque = maxBrakeTorque;
+                continue;
+            }
+            else
+            {
+                axleInfos[i].leftWheel.brakeTorque = 0;
+                axleInfos[i].rightWheel.brakeTorque = 0;
+            }
             if (axleInfos[i].steering)
             {
                 axleInfos[i].leftWheel.steerAngle = steering;
@@ -89,7 +117,6 @@ public class CarRider : MonoBehaviour
                 axleInfos[i].rightWheel.motorTorque = motor;
             }
         }
-
     }
     private void KeyboardMovement() // Basic Car Movement Script //
     {
@@ -106,6 +133,17 @@ public class CarRider : MonoBehaviour
 
         for (int i = 0; i < axleInfos.Count; i++)
         {
+            if (x == 0 && y == 0)
+            {
+                axleInfos[i].leftWheel.brakeTorque = maxBrakeTorque;
+                axleInfos[i].rightWheel.brakeTorque = maxBrakeTorque;
+                continue;
+            }
+            else
+            {
+                axleInfos[i].leftWheel.brakeTorque = 0;
+                axleInfos[i].rightWheel.brakeTorque = 0;
+            }
             if (axleInfos[i].steering)
             {
                 axleInfos[i].leftWheel.steerAngle = steering;
@@ -125,6 +163,29 @@ public class CarRider : MonoBehaviour
             LeftWheels[i] = axleInfos[i].leftWheel;
             RightWheels[i] = axleInfos[i].rightWheel;
         }
+    }
+    private void DetectSpinRequest()
+    {
+        if(Input.GetKeyDown(KeyCode.Space) && !SpinRequested && !isFlipped)
+        {
+            targetRotation = transform.rotation * targetRelativeRotation;
+            SpinRequested = true;
+        }
+    }
+    private void SpinCar()
+    {
+        if (!SpinRequested) { return; }
+
+        if(Quaternion.Angle(rb.rotation, targetRotation) <= FlipStoppingAngle)
+        {
+            SpinRequested = false;
+        }
+        else
+        {
+            rb.MoveRotation(Quaternion.RotateTowards(rb.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime));
+        }
+
+        
     }
     private void FlipCar()
     {

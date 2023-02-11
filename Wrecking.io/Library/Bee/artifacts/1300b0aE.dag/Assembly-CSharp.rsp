@@ -350,6 +350,7 @@
 "Assets/Scripts/AI/CarAI.cs"
 "Assets/Scripts/Ball/BallController.cs"
 "Assets/Scripts/Camera/CameraController.cs"
+"Assets/Scripts/Camera/CameraShake.cs"
 "Assets/Scripts/Car/CarController.cs"
 "Assets/Scripts/Car/CarRider.cs"
 "Assets/Scripts/Car/RandomizeMeshColor.cs"
@@ -361,6 +362,7 @@
 "Assets/Scripts/Management/LevelManager.cs"
 "Assets/Scripts/NavMesh/UpdateNavMesh.cs"
 "Assets/Scripts/Rope/DrawRope.cs"
+"Assets/Scripts/Test/Test.cs"
 "Assets/Scripts/UI/ShowTouch.cs"
 -langversion:9.0
 
