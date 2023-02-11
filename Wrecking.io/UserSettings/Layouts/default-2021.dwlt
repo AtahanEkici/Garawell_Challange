@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Console
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -320,22 +320,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Car
+    - Assets/Scenes
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/Car
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: F:\Garawell_Challange\Wrecking.io
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 305a0000
-    m_LastClickedID: 23088
-    m_ExpandedIDs: 00000000745800008058000084580000a858000000ca9a3bffffff7f
+    m_SelectedIDs: d27a0000
+    m_LastClickedID: 31442
+    m_ExpandedIDs: 00000000a87a0000d47a000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -363,7 +363,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000074580000
+    m_ExpandedIDs: 00000000a87a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -388,8 +388,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: a0faffff
-    m_LastClickedInstanceID: -1376
+    m_SelectedInstanceIDs: 3e7b0000
+    m_LastClickedInstanceID: 31550
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300009c57000000000000
     m_RenameOverlay:
@@ -450,9 +450,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 9a570000
-      m_LastClickedID: 22426
-      m_ExpandedIDs: 7afaffff8efaffffaafaffff32fbffff
+      m_SelectedIDs: 3e7b0000
+      m_LastClickedID: 31550
+      m_ExpandedIDs: 50d5ffff84d5ffffc4d7ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -734,9 +734,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.87029314, y: 6.9578605, z: 0.28066254}
+    m_Target: {x: 2.6384072, y: -8.350037, z: 0.5354651}
     speed: 2
-    m_Value: {x: 0.87029314, y: 6.9578605, z: 0.28066254}
+    m_Value: {x: 2.6384072, y: -8.350037, z: 0.5354651}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -783,13 +783,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.24624124, y: 0.7434864, z: -0.36384964, w: -0.50442886}
+    m_Target: {x: -0.3747482, y: -0.55325466, z: 0.30516508, w: -0.67873913}
     speed: 2
-    m_Value: {x: -0.24621148, y: 0.7433965, z: -0.36380565, w: -0.5043679}
+    m_Value: {x: -0.37422648, y: -0.5541781, z: 0.30567497, w: -0.67779344}
   m_Size:
-    m_Target: 1.6017084
+    m_Target: 12.124355
     speed: 2
-    m_Value: 1.6017084
+    m_Value: 12.124354
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -994,7 +994,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 22426
+  m_LastSelectedObjectID: -17654
 --- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1056,9 +1056,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1463
+    x: 1462
     y: 73
-    width: 456
+    width: 457
     height: 918
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:

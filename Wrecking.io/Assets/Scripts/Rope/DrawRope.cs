@@ -21,6 +21,18 @@ public class DrawRope : MonoBehaviour
     }
     private void Update()
     {
+        CheckIfNull();
+        UpdatePositions();
+    }
+    private void CheckIfNull()
+    {
+        if (StartPos == null || endPos == null)
+        {
+            Destroy(transform.gameObject);
+        }
+    }
+    private void UpdatePositions()
+    {
         lr.SetPosition(0, StartPos.position);
         lr.SetPosition(1, endPos.position);
     }

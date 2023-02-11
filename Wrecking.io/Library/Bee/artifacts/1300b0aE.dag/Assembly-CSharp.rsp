@@ -347,6 +347,7 @@
 -r:"Library/Bee/artifacts/1300b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/Scripts/AI/AIController.cs"
+"Assets/Scripts/AI/CarAI.cs"
 "Assets/Scripts/Ball/BallController.cs"
 "Assets/Scripts/Camera/CameraController.cs"
 "Assets/Scripts/Car/CarController.cs"
@@ -358,6 +359,7 @@
 "Assets/Scripts/Ground/OuterGround.cs"
 "Assets/Scripts/Management/GameManager.cs"
 "Assets/Scripts/Management/LevelManager.cs"
+"Assets/Scripts/NavMesh/UpdateNavMesh.cs"
 "Assets/Scripts/Rope/DrawRope.cs"
 "Assets/Scripts/UI/ShowTouch.cs"
 -langversion:9.0

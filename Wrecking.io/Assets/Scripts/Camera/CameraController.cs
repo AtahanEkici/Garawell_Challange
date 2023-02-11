@@ -43,12 +43,12 @@ public class CameraController : MonoBehaviour
     }
     private void TailTarget()
     {
-        if (Target == null) { RotateDeathCam(); return; } // if the target is destroyed return //
-        targetPosition = Target.position - Offset;
-        camTransform.SetPositionAndRotation(Vector3.SmoothDamp(transform.position,targetPosition,ref velocity,SmoothTime * Time.smoothDeltaTime), Quaternion.Lerp(transform.rotation,InitialRotation,Time.smoothDeltaTime));
+        if (Target == null) { RotateDeathCam(); return; } // if the target is destroyed stop execution //
+        targetPosition = Target.position + Offset;
+        camTransform.position =  Vector3.SmoothDamp(transform.position,targetPosition,ref velocity,SmoothTime);
         transform.LookAt(Target);
     }
-    private void RotateDeathCam()
+    public void RotateDeathCam()
     {
         camTransform.rotation = Quaternion.RotateTowards(camTransform.rotation, Quaternion.Euler(camTransform.up),Time.smoothDeltaTime);
     }
