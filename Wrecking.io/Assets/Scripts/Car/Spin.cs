@@ -32,6 +32,11 @@ public class Spin : MonoBehaviour
     [SerializeField] private float InitialFollowSpeed = 5f;
     [SerializeField] private float BallFollowSpeedMultiplier = 4f;
 
+    [Header("Disqualification Parameters")]
+    [SerializeField] private Vector3 ComparisonVector = Vector3.zero;
+    [SerializeField] private float MaxDistance = 500f;
+    [SerializeField] private float CurrentDistance;
+
     [Header("Wheel Hit")]
     [SerializeField] private WheelHit hit;
     private void Awake()
@@ -59,7 +64,16 @@ public class Spin : MonoBehaviour
     private void Update()
     {
         DetectFlipped();
-        SpinCounter();
+        SpinCounter(); 
+        CheckDisqualification();
+    }
+    private void CheckDisqualification()
+    {
+        if(Vector3.Distance(transform.position, ComparisonVector) > MaxDistance)
+        {
+            GameManager gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+            gm.GameOver();
+        }
     }
     public void SpinIfPlayer()
     {

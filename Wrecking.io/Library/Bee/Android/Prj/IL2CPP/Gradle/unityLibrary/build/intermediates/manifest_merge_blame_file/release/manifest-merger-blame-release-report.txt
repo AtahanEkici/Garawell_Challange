@@ -1,0 +1,135 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    xmlns:tools="http://schemas.android.com/tools"
+4    package="com.unity3d.player"
+5    android:versionCode="1"
+6    android:versionName="1.0" >
+7
+8    <uses-sdk
+9        android:minSdkVersion="22"
+9-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml
+10        android:targetSdkVersion="33" />
+10-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml
+11
+12    <uses-feature android:glEsVersion="0x00030000" />
+12-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:19:3-52
+12-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:19:17-49
+13    <uses-feature
+13-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:20:3-91
+14        android:name="android.hardware.vulkan.version"
+14-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:20:17-63
+15        android:required="false" />
+15-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:20:64-88
+16    <uses-feature
+16-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:21:3-84
+17        android:name="android.hardware.type.pc"
+17-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:21:17-56
+18        android:required="false" />
+18-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:21:57-81
+19    <uses-feature android:name="android.software.home_screen" />
+19-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:22:3-63
+19-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:22:17-60
+20    <uses-feature
+20-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:23:3-88
+21        android:name="android.hardware.touchscreen"
+21-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:23:17-60
+22        android:required="false" />
+22-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:23:61-85
+23    <uses-feature
+23-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:24:3-99
+24        android:name="android.hardware.touchscreen.multitouch"
+24-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:24:17-71
+25        android:required="false" />
+25-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:24:72-96
+26    <uses-feature
+26-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:25:3-108
+27        android:name="android.hardware.touchscreen.multitouch.distinct"
+27-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:25:17-80
+28        android:required="false" />
+28-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:25:81-105
+29
+30    <application
+30-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:3:3-18:17
+31        android:extractNativeLibs="true"
+31-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:3:16-48
+32        android:isGame="true" >
+32-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:3:49-70
+33        <activity
+33-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:5-12:16
+34            android:name="com.unity3d.player.UnityPlayerActivity"
+34-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:15-68
+35            android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|fontScale|layoutDirection|density"
+35-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:181-362
+36            android:exported="true"
+36-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:434-457
+37            android:hardwareAccelerated="false"
+37-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:398-433
+38            android:launchMode="singleTask"
+38-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:149-180
+39            android:resizeableActivity="false"
+39-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:363-397
+40            android:screenOrientation="landscape"
+40-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:111-148
+41            android:theme="@style/UnityThemeSelector" >
+41-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:69-110
+42            <intent-filter>
+42-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:5:7-9:23
+43                <action android:name="android.intent.action.MAIN" />
+43-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:6:9-61
+43-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:6:17-58
+44
+45                <category android:name="android.intent.category.LAUNCHER" />
+45-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:7:9-69
+45-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:7:19-66
+46                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+46-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:8:9-78
+46-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:8:19-75
+47            </intent-filter>
+48
+49            <meta-data
+49-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:10:7-82
+50                android:name="unityplayer.UnityActivity"
+50-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:10:18-58
+51                android:value="true" />
+51-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:10:59-79
+52            <meta-data
+52-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:11:7-78
+53                android:name="android.notch_support"
+53-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:11:18-54
+54                android:value="true" />
+54-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:11:55-75
+55        </activity>
+56
+57        <meta-data
+57-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:13:5-69
+58            android:name="unity.splash-mode"
+58-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:13:16-48
+59            android:value="0" />
+59-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:13:49-66
+60        <meta-data
+60-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:14:5-74
+61            android:name="unity.splash-enable"
+61-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:14:16-50
+62            android:value="True" />
+62-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:14:51-71
+63        <meta-data
+63-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:15:5-78
+64            android:name="unity.launch-fullscreen"
+64-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:15:16-54
+65            android:value="True" />
+65-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:15:55-75
+66        <meta-data
+66-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:16:5-84
+67            android:name="unity.allow-resizable-window"
+67-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:16:16-59
+68            android:value="False" />
+68-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:16:60-81
+69        <meta-data
+69-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:17:5-81
+70            android:name="notch.config"
+70-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:17:16-43
+71            android:value="portrait|landscape" />
+71-->F:\Garawell_Challange\Wrecking.io\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\AndroidManifest.xml:17:44-78
+72    </application>
+73
+74</manifest>

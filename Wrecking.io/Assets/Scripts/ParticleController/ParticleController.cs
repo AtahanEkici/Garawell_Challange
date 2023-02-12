@@ -6,11 +6,10 @@ public class ParticleController : MonoBehaviour
 {
     [Header("Static variables")]
     private static ParticleController _instance;
-    private static readonly string ParticlesPath = "Assets/Prefabs/Particles";
-    private static readonly string ParticleFileExtension = "*.prefab";
 
     [Header("Particles' List")]
-    [SerializeField] private static List<ParticleSystem> Particles = new();
+    [SerializeField] private List<ParticleSystem> Particles = new();
+    [SerializeField] private static List<ParticleSystem> ParticlesStatic = new();
 
     [Header("Particles' Names")]
     [SerializeField] public static string Flame = "Flame";
@@ -21,7 +20,7 @@ public class ParticleController : MonoBehaviour
     }
     private void Start()
     {
-        GetParticleAssets();
+        Particles = ParticlesStatic;
     }
     private void CheckInstance()
     {
@@ -36,14 +35,14 @@ public class ParticleController : MonoBehaviour
     }
     public static ParticleSystem GetParticleFromName(string given_name)
     {
-        for (int i = 0; i < Particles.Count; i++)
+        for (int i = 0; i < ParticlesStatic.Count; i++)
         {
-            if (Particles[i].name == given_name)
+            if (ParticlesStatic[i].name == given_name)
             {
-                return Particles[i];
+                return ParticlesStatic[i];
             }
         }
-        return Particles[0]; // Defaultly return the first element of the list //
+        return ParticlesStatic[0]; // Defaultly return the first element of the list //
     }
     public static ParticleSystem InstantiateOnLocation(string ParticleName, Vector3 Position, Quaternion Rotation)
     {
@@ -67,17 +66,5 @@ public class ParticleController : MonoBehaviour
         }
 
         Instantiate(temp, Position, Rotation);
-    }
-    private static void GetParticleAssets()
-    {
-        if (Particles.Count > 0) { return; }
-
-        string[] Files = Directory.GetFiles(ParticlesPath, ParticleFileExtension);
-
-        for (int i = 0; i < Files.Length; i++)
-        {
-            ParticleSystem temp = (ParticleSystem)AssetDatabase.LoadAssetAtPath(Files[i], typeof(ParticleSystem));
-            Particles.Add(temp);
-        }
     }
 }

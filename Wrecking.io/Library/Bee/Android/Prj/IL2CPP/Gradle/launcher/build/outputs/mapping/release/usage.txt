@@ -1,0 +1,11 @@
+com.FreeForAllGames.Wrecking.io.R
+com.FreeForAllGames.Wrecking.io.R$id
+com.FreeForAllGames.Wrecking.io.R$mipmap
+com.FreeForAllGames.Wrecking.io.R$drawable
+com.FreeForAllGames.Wrecking.io.R$string
+com.FreeForAllGames.Wrecking.io.R$style
+com.FreeForAllGames.Wrecking.io.BuildConfig
+com.google.androidgamesdk.ChoreographerCallback$a:
+    final synthetic com.google.androidgamesdk.ChoreographerCallback b
+com.google.androidgamesdk.SwappyDisplayManager$a:
+    final synthetic com.google.androidgamesdk.SwappyDisplayManager b

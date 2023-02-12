@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class ShowTouch : MonoBehaviour
 {
-    private static readonly string AssetLocation = "Assets/Prefabs/UI";
-    public static readonly string AssetFileExtension = "*.prefab".Trim();
 
     [Header("Components for Touch Virtualization")]
     [SerializeField] private GameObject[] GameObjects;
@@ -16,12 +14,10 @@ public class ShowTouch : MonoBehaviour
 
     [Header("Circle")]
     [SerializeField] private GameObject Circle = null;
-    [SerializeField] private static readonly string CircleName = "Circle";
     [SerializeField] private static Vector2 InitialMousePosition;
 
     [Header("Touch pointer")]
     [SerializeField] private GameObject Touch = null;
-    [SerializeField] private static readonly string TouchName = "Touch";
     [SerializeField] private float MaxDistance;
     [SerializeField] private Vector2 allowedPos;
 
@@ -29,7 +25,6 @@ public class ShowTouch : MonoBehaviour
     [SerializeField]public static Vector2 MouseControllerAxis;
     private void Awake()
     {
-        GetTouchVirtualizationAssets();
         InstantiateTouchObjects();
     }
     private void Start()
@@ -60,26 +55,6 @@ public class ShowTouch : MonoBehaviour
             MouseControllerAxis = new(MouseControllerAxis.y, MouseControllerAxis.x);
         }      
     }
-    private void GetTouchVirtualizationAssets()
-    {
-        string[] Files = Directory.GetFiles(AssetLocation,AssetFileExtension);
-        GameObjects = new GameObject[Files.Length];
-
-        for (int i = 0;i<Files.Length;i++)
-        {
-            GameObject temp = (GameObject)AssetDatabase.LoadAssetAtPath(Files[i],typeof(GameObject));
-            GameObjects[i] = temp;
-
-            if (GameObjects[i].name == CircleName)
-            {
-                Circle = GameObjects[i];
-            }
-            else if (GameObjects[i].name == TouchName)
-            {
-                Touch = GameObjects[i];
-            }
-        }
-    }
     private void AssetSettings()
     {
         Image touch = Touch.GetComponent<Image>();
@@ -89,7 +64,6 @@ public class ShowTouch : MonoBehaviour
         Image circle = Circle.GetComponent<Image>();
         circle.maskable = false;
         circle.raycastTarget = false;
-
     }
     private void InstantiateTouchObjects()
     {

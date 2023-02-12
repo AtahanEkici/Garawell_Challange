@@ -1,0 +1,4 @@
+#Mon Feb 13 01:38:28 EET 2023
+base.0=F\:\\Garawell_Challange\\Wrecking.io\\Library\\Bee\\Android\\Prj\\IL2CPP\\Gradle\\launcher\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

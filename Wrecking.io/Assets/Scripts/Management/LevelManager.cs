@@ -6,8 +6,6 @@ public class LevelManager : MonoBehaviour
 {
     private static LevelManager _instance;
 
-    private static readonly string AssetLocation = "Assets/Prefabs/AI";
-
     [Header("Spawn Positions")]
     [SerializeField] private Vector3[] SpawnLocations;
 
@@ -30,7 +28,6 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         CheckLocalInstance();
-        GetAsset();
         FieldScale = GameObject.FindGameObjectWithTag(OuterGround.GroundTag).transform.localScale.x;
         SpawnObjects(); 
     }
@@ -85,10 +82,5 @@ public class LevelManager : MonoBehaviour
                 gm.GameOver();
             }
         }
-    }
-    private void GetAsset()
-    {
-        string[] Files = Directory.GetFiles(AssetLocation,ShowTouch.AssetFileExtension);
-        AI_Platforms = (GameObject)AssetDatabase.LoadAssetAtPath(Files[0], typeof(GameObject));
     }
 }
