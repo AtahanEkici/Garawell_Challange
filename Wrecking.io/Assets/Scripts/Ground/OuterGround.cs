@@ -4,6 +4,7 @@ public class OuterGround : MonoBehaviour
 {
     private static OuterGround _instance; // Singleton Pattern //
 
+    public static readonly string GroundTag = "Ground";
     public static readonly string TextureString = "_MainTex"; // String needed to access the main texture component of the default shader //
 
     [Header("Shrinking options")]
@@ -111,7 +112,12 @@ public class OuterGround : MonoBehaviour
         {
             isTimerActive = false;
             transform.localScale = Vector3.zero;
-            Destroy(this);
+            GameObject[] go = GameObject.FindGameObjectsWithTag(GroundTag);
+
+            for(int i=0;i<go.Length;i++)
+            {
+                Destroy(go[i]);
+            } 
         }
     }
 }

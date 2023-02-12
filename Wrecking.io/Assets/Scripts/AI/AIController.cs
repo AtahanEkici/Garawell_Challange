@@ -12,13 +12,17 @@ public class AIController : MonoBehaviour
     [Header("Target Info")]
     [SerializeField] private Transform Target;
     [SerializeField] private float TargetDistance;
-    [SerializeField] private float AttackDistance = 2f;
+    [SerializeField] private float AttackDistance = 4f;
+
+    [Header("Foreign Components")]
+    [SerializeField] private Spin LocalSpin;
 
     private void Awake()
     {
         AI_Settings();
         Instance_ID = gameObject.GetInstanceID();
         LevelManager.AddList(gameObject);
+        LocalSpin = GetComponent<Spin>();
     }
     private void Update()
     {
@@ -62,6 +66,7 @@ public class AIController : MonoBehaviour
         if(TargetDistance < AttackDistance)
         {
             Debug.Log("Attack!!!");
+            LocalSpin.SpinAI();
             // Attack Target //
         }
     }
@@ -97,12 +102,5 @@ public class AIController : MonoBehaviour
     private void OnDestroy()
     {
         LevelManager.RemoveFromList(Instance_ID);
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(!collision.collider.CompareTag("Ground"))
-        {
-            Destroy(collision.gameObject);
-        }
     }
 }

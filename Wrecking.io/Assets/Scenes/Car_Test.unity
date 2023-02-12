@@ -221,7 +221,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &331836777
 Rigidbody:
@@ -260,6 +260,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2976416021210756735, guid: f709861af6473774a995f1bbe3ab13eb, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4786538352249406228, guid: f709861af6473774a995f1bbe3ab13eb, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -380,7 +384,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &945544232
 MonoBehaviour:
@@ -460,7 +464,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1428915882
 GameObject:
@@ -545,7 +549,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 45, y: 45, z: 0}
 --- !u!114 &1428915886
 MonoBehaviour:
@@ -566,38 +570,6 @@ MonoBehaviour:
   Target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
---- !u!1 &1702354770 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3458358660943283546, guid: 50fb3f7f6e1fd4e46ab5ae33e7fb93c2, type: 3}
-  m_PrefabInstance: {fileID: 1070039378324855755}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1702354772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1702354770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2288a87e430bdb84686daea063e7ae6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  car_rider: {fileID: 0}
-  isFlipped: 0
-  FlipForceMultiplier: 1
-  FlipForceMode: 1
-  FlipSpeed: 10
-  StoppingAngle: 1
-  StartingAngle: 45
-  initialRotation_Flip: {x: 0, y: 0, z: 0, w: 1}
-  FlippedTimer: 1
-  counter: 1
-  SpinRequested: 0
-  targetRotation: {x: 0, y: 0, z: 0, w: 1}
-  rotationSpeed: 360
-  SpinTimer: 1
-  counter_spin: 0
 --- !u!1 &2127231455
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,7 +662,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 45, y: -30, z: 0}
 --- !u!1001 &1070039378324855755
 PrefabInstance:
@@ -745,6 +717,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1070039377714303950, guid: 50fb3f7f6e1fd4e46ab5ae33e7fb93c2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315402440400216562, guid: 50fb3f7f6e1fd4e46ab5ae33e7fb93c2, type: 3}
+      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

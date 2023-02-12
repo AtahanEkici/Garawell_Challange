@@ -5,12 +5,13 @@ public class Spin : MonoBehaviour
     private static readonly string SpinButtonTag = "SpinButton";
     private static readonly string PlayerTag = "Player";
 
-    [Header("Foreign Script References")]
-    [SerializeField] private CarRider car_rider;
+    [SerializeField] private WheelCollider[] wheels;
 
-    [Header("Parent object")]
-    [SerializeField] private Transform BallTransform;
-    [SerializeField] private Rigidbody ballRigidbody;
+    [Header("Foreign Script References")]
+    [SerializeField] private BallController ballControl;
+
+    [Header("Local References")]
+    [SerializeField] private Rigidbody rb;
 
     [Header("Flip Controlls")]
     [SerializeField] public bool isFlipped = false;
@@ -27,24 +28,28 @@ public class Spin : MonoBehaviour
     [SerializeField] private float rotationSpeed = 360f;
     [SerializeField] private float SpinTimer = 1f;
     [SerializeField] private float counter_spin = 0;
-    [SerializeField] private UnityEngine.UI.Button Spin_Button;
+    [SerializeField] private Button Spin_Button;
+    [SerializeField] private float InitialFollowSpeed = 5f;
+    [SerializeField] private float BallFollowSpeedMultiplier = 4f;
 
     [Header("Wheel Hit")]
     [SerializeField] private WheelHit hit;
     private void Awake()
     {
-        car_rider = GetComponent<CarRider>();
+        rb = GetComponent<Rigidbody>();
+        wheels = transform.parent.GetComponentsInChildren<WheelCollider>();
         initialRotation_Flip = transform.rotation;
         counter = FlippedTimer;
-        BallTransform = transform.parent.GetChild(0);
-        ballRigidbody = BallTransform.gameObject.GetComponent<Rigidbody>();
-        Spin_Button = GameObject.FindGameObjectWithTag(SpinButtonTag).GetComponent<UnityEngine.UI.Button> (); // if appears to be red text underlay uninstall and reinstall the Unity UI package from Package Manager //
+        Spin_Button = GameObject.FindGameObjectWithTag(SpinButtonTag).GetComponent<Button> (); // if appears to be red text underlay uninstall and reinstall the Unity UI package from Package Manager //
+        ballControl = transform.parent.GetComponent<BallController>();
+        InitialFollowSpeed = ballControl.FollowSpeed;
     }
     private void Start()
     {
-        CheckIfIsPlayer();
-        Spin_Button.onClick.AddListener(delegate { Debug.Log("Button Pressed"); });
-        Debug.Log("Geçti");
+        if(CompareTag(PlayerTag)) // only player //
+        {
+            Spin_Button.onClick.AddListener(SpinIfPlayer);
+        }  
     }
     private void FixedUpdate()
     {
@@ -56,20 +61,8 @@ public class Spin : MonoBehaviour
         DetectFlipped();
         SpinCounter();
     }
-    private bool CheckIfIsPlayer()
-    {
-        if(gameObject.CompareTag(PlayerTag))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
     public void SpinIfPlayer()
     {
-        Debug.Log("Geçti spin");
         SpinRequest();
     }
     public void SpinAI()
@@ -78,7 +71,8 @@ public class Spin : MonoBehaviour
     }
     private void SpinRequest()
     {
-        Debug.Log("Spin requested");
+        InitialFollowSpeed = ballControl.FollowSpeed;
+        ballControl.FollowSpeed = InitialFollowSpeed * BallFollowSpeedMultiplier;
         counter_spin = 0f;
         SpinRequested = true;
     }
@@ -93,9 +87,9 @@ public class Spin : MonoBehaviour
             if(counter_spin >= SpinTimer)
             {
                 SpinRequested = false;
+                ballControl.FollowSpeed = InitialFollowSpeed;
+                counter_spin = 0f;
             }
-
-            return;
         }   
     }
     private void SpinPlatform()
@@ -104,15 +98,9 @@ public class Spin : MonoBehaviour
 
         float katsayi = rotationSpeed * Time.fixedDeltaTime;
         Quaternion NewRotation = Quaternion.Euler(0f, katsayi, 0f);
-
         targetRotation = transform.rotation * NewRotation;
-        Quaternion BallTargetRotation = BallTransform.rotation * NewRotation;
-
         Quaternion LocalRotation = Quaternion.Lerp(transform.rotation, targetRotation, katsayi);
-        Quaternion BallRotation = Quaternion.Lerp(BallTransform.rotation, BallTargetRotation, katsayi);
-
-        car_rider.rb.MoveRotation(LocalRotation);
-        ballRigidbody.MoveRotation(BallRotation);
+        rb.MoveRotation(LocalRotation);
     }
     private void FlipCar()
     {
@@ -120,7 +108,7 @@ public class Spin : MonoBehaviour
         if (SpinRequested) { return; }
 
         Quaternion rotation = Quaternion.Lerp(transform.rotation, initialRotation_Flip, Time.fixedDeltaTime * rotationSpeed);
-        car_rider.rb.MoveRotation(rotation);
+        rb.MoveRotation(rotation);
     }
     private void DetectFlipped()
     {
@@ -128,25 +116,21 @@ public class Spin : MonoBehaviour
 
         int total_hits = 0;
 
-        for (int i = 0; i < car_rider.RightWheels.Length; i++)
+        for (int i = 0; i < wheels.Length; i++)
         {
-            if (!car_rider.LeftWheels[i].GetGroundHit(out hit)) // Check if the wheelcollider is not colliding with something. If half of  them is not hitting anything will flip the car //
-            {
-                total_hits++;
-            }
-            if (!car_rider.LeftWheels[i].GetGroundHit(out hit))
+            if (!wheels[i].GetGroundHit(out hit)) // Check if the wheelcollider is not colliding with something. If half of  them is not hitting anything will flip the car //
             {
                 total_hits++;
             }
         }
 
-        if (total_hits >= car_rider.RightWheels.Length && Mathf.Abs(transform.rotation.eulerAngles.x) < StartingAngle)
+        if (total_hits >= wheels.Length && Mathf.Abs(transform.rotation.eulerAngles.x) < StartingAngle)
         {
             counter -= Time.deltaTime;
 
             if (counter <= 0)
             {
-                car_rider.rb.AddForce(Vector3.up * FlipForceMultiplier, FlipForceMode); // Levitate the car a bit //
+                rb.AddForce(Vector3.up * FlipForceMultiplier, FlipForceMode); // Levitate the car a bit //
                 isFlipped = true;
                 counter = FlippedTimer;
             }

@@ -23,7 +23,6 @@ public class CarRider : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        
         LeftWheels = new WheelCollider[axleInfos.Count];
         RightWheels = new WheelCollider[axleInfos.Count];
         GetWheelColliders();

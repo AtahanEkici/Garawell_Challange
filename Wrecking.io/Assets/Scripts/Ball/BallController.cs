@@ -9,7 +9,7 @@ public class BallController : MonoBehaviour
     [SerializeField] private Rigidbody BallBody;
 
     [Header("Follow Speed")]
-    [SerializeField] private float speed = 10f;
+    [SerializeField] public float FollowSpeed = 10f;
 
     [Header("Car Follow Location")]
     [SerializeField] private Transform DesiredLocation;
@@ -23,7 +23,7 @@ public class BallController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Vector3 move = Vector3.Lerp(Ball.position, DesiredLocation.position, Time.fixedDeltaTime * speed);
+        Vector3 move = Vector3.Lerp(Ball.position, DesiredLocation.position, Time.fixedDeltaTime * FollowSpeed);
         BallBody.MovePosition(move);
     }
 }

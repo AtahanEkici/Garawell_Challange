@@ -21,11 +21,6 @@ public class CameraController : MonoBehaviour
         Target = GameObject.FindGameObjectWithTag(PlayerTag).transform;
         camTransform = transform;
         InitialRotation = transform.rotation;
-        //Offset = transform.position;
-    }
-    private void Start()
-    {
-        //transform.parent = Target;
     }
     private void Update()
     {
@@ -46,8 +41,6 @@ public class CameraController : MonoBehaviour
     {
         if (Target == null) { RotateDeathCam(); return; } // if the target is destroyed stop execution //
         targetPosition = Target.position + LocationOffset;
-        //camTransform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, SmoothTime);
-        //camTransform.rotation = Quaternion.Lerp(camTransform.rotation, InitialRotation, SmoothTime);
         camTransform.SetPositionAndRotation(Vector3.SmoothDamp(transform.position,targetPosition,ref velocity,SmoothTime), Quaternion.Lerp(camTransform.rotation,InitialRotation,Time.smoothDeltaTime));
         transform.LookAt(camTransform);
     }

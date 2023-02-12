@@ -3,28 +3,18 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
 
-    [Header("Do Not Destroy")]
-    [SerializeField] private bool Dont_Destroy_On_Load = true;
-
     [Header("Outside References")]
     [SerializeField] private LevelManager levelman;
     [SerializeField] private GameObject GameOverCanvas;
     private void Awake()
     {
         CheckInstance();
-        CheckDestruction(); 
     }
     private void Start()
     {
         
     }
-    private void CheckDestruction()
-    {
-        if (Dont_Destroy_On_Load)
-        {
-            DontDestroyOnLoad(this);
-        }
-    }
+
     private void CheckInstance()
     {
         if (_instance != null && _instance != this)
@@ -44,9 +34,10 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
-    public void GameOver()
+    public static void GameOver()
     {
-
+        Time.timeScale = 0;
+        // Game Over Screen
     }
     public static void Restart()
     {

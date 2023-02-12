@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,25 +12,34 @@ public class AlternateAI : MonoBehaviour
     public Quaternion wheelMeshRotation;
     public Vector3 wheelMeshPosition;
 
+    [Header("Instance ID")]
+    [SerializeField] private int Instance_ID;
+
+    [Header("Target Info")]
+    [SerializeField] private Transform Target;
+    [SerializeField] private float TargetDistance;
+    [SerializeField] private float AttackDistance = 2f;
+
+    [Header("Foreign Components")]
+    [SerializeField] private Spin LocalSpin;
+
     private void Awake()
     {
-        agent.updateRotation = false;
         agent = GetComponent<NavMeshAgent>();
-#pragma warning disable UNT0014 // Invalid type for call to GetComponent
-        wheelColliders = GetComponentInChildren<WheelCollider[]>();
-#pragma warning restore UNT0014 // Invalid type for call to GetComponent
+        agent.updateRotation = false;
+        wheelColliders = GetComponentsInChildren<WheelCollider>();
+        Instance_ID = gameObject.GetInstanceID();
+        LevelManager.AddList(gameObject);
+        WheelSettings();
     }
-
-    void Update()
+    private void Update()
     {
-        for (int i = 0; i < 4; i++)
-        {
-           
-            wheelColliders[i].GetWorldPose(out wheelMeshPosition, out wheelMeshRotation);
-            wheelMeshes[i].transform.position = wheelMeshPosition;
-            wheelMeshes[i].transform.rotation = wheelMeshRotation;
-        }
-
+        Movement();
+        FollowTarget();
+        AttackTarget();
+    }
+    private void Movement()
+    {
         if (agent.remainingDistance > agent.stoppingDistance)
         {
             float speedFactor = agent.desiredVelocity.magnitude / agent.speed;
@@ -47,5 +57,76 @@ public class AlternateAI : MonoBehaviour
             wheelColliders[2].motorTorque = 0f;
             wheelColliders[3].motorTorque = 0f;
         }
+    }
+    private void WheelSettings()
+    {
+        for(int i=0;i<wheelColliders.Length;i++)
+        {
+            wheelMeshes[i] = wheelColliders[i].gameObject.transform;
+        }
+    }
+    private void FollowTarget()
+    {
+        GetNearTarget();
+    }
+    private void GetNearTarget()
+    {
+        if (Target == null)
+        {
+            FindNewTarget();
+        }
+        else
+        {
+            SetDestination(Target.position);
+            CalculateTargetDistance();
+        }
+    }
+    private void SetDestination(Vector3 destination)
+    {
+        if (agent == null) { return; }
+        agent.destination = destination;
+    }
+    private void AttackTarget()
+    {
+        if (Target == null) { return; }
+
+        if (TargetDistance < AttackDistance)
+        {
+            Debug.Log("Attack!!!");
+            LocalSpin.SpinAI();
+        }
+    }
+    private void FindNewTarget()
+    {
+        List<GameObject> cars = LevelManager.Cars;
+
+        if (cars.Count <= 0) { return; }
+
+        float MinDistance = float.MaxValue;
+        float CurrentDistance = 0f;
+        int index = 0;
+
+        for (int i = 0; i < cars.Count; i++)
+        {
+            if (cars[i].GetInstanceID() == Instance_ID) { continue; }
+
+            CurrentDistance = Vector3.Distance(transform.position, cars[i].transform.position);
+
+            if (CurrentDistance < MinDistance)
+            {
+                MinDistance = CurrentDistance;
+                index = i;
+            }
+        }
+        Target = cars[index].transform;
+        CalculateTargetDistance();
+    }
+    private void CalculateTargetDistance()
+    {
+        TargetDistance = Vector3.Distance(transform.position, Target.position);
+    }
+    private void OnDestroy()
+    {
+        LevelManager.RemoveFromList(Instance_ID);
     }
 }
