@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 public class Spin : MonoBehaviour
 {
+    private static readonly string SpinButtonTag = "SpinButton";
+    private static readonly string PlayerTag = "Player";
+
     [Header("Foreign Script References")]
     [SerializeField] private CarRider car_rider;
 
@@ -23,6 +27,7 @@ public class Spin : MonoBehaviour
     [SerializeField] private float rotationSpeed = 360f;
     [SerializeField] private float SpinTimer = 1f;
     [SerializeField] private float counter_spin = 0;
+    [SerializeField] private UnityEngine.UI.Button Spin_Button;
 
     [Header("Wheel Hit")]
     [SerializeField] private WheelHit hit;
@@ -31,8 +36,15 @@ public class Spin : MonoBehaviour
         car_rider = GetComponent<CarRider>();
         initialRotation_Flip = transform.rotation;
         counter = FlippedTimer;
-        BallTransform = transform.parent;
+        BallTransform = transform.parent.GetChild(0);
         ballRigidbody = BallTransform.gameObject.GetComponent<Rigidbody>();
+        Spin_Button = GameObject.FindGameObjectWithTag(SpinButtonTag).GetComponent<UnityEngine.UI.Button> (); // if appears to be red text underlay uninstall and reinstall the Unity UI package from Package Manager //
+    }
+    private void Start()
+    {
+        CheckIfIsPlayer();
+        Spin_Button.onClick.AddListener(delegate { Debug.Log("Button Pressed"); });
+        Debug.Log("Geçti");
     }
     private void FixedUpdate()
     {
@@ -41,12 +53,39 @@ public class Spin : MonoBehaviour
     }
     private void Update()
     {
-        DetectFlipped(); 
-        DetectSpinRequest();
+        DetectFlipped();
+        SpinCounter();
     }
-    private void DetectSpinRequest()
+    private bool CheckIfIsPlayer()
+    {
+        if(gameObject.CompareTag(PlayerTag))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public void SpinIfPlayer()
+    {
+        Debug.Log("Geçti spin");
+        SpinRequest();
+    }
+    public void SpinAI()
+    {
+        SpinRequest();
+    }
+    private void SpinRequest()
+    {
+        Debug.Log("Spin requested");
+        counter_spin = 0f;
+        SpinRequested = true;
+    }
+    private void SpinCounter()
     {
         if (isFlipped) { return; }
+
         if (SpinRequested) 
         { 
             counter_spin += Time.deltaTime; 
@@ -57,14 +96,7 @@ public class Spin : MonoBehaviour
             }
 
             return;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("Spin requested");
-            counter_spin = 0f;
-            SpinRequested = true;
-        }
+        }   
     }
     private void SpinPlatform()
     {
