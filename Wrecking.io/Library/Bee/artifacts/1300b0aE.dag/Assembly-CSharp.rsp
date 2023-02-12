@@ -367,10 +367,13 @@
 "Assets/Scripts/Management/GameManager.cs"
 "Assets/Scripts/Management/LevelManager.cs"
 "Assets/Scripts/NavMesh/UpdateNavMesh.cs"
+"Assets/Scripts/ParticleController/ParticleController.cs"
+"Assets/Scripts/Restart/Restart.cs"
 "Assets/Scripts/Rope/DrawRope.cs"
 "Assets/Scripts/Test/ObjectRotator.cs"
 "Assets/Scripts/Test/Test.cs"
 "Assets/Scripts/UI/ShowTouch.cs"
+"Assets/Scripts/Water/Water.cs"
 -langversion:9.0
 
 /deterministic

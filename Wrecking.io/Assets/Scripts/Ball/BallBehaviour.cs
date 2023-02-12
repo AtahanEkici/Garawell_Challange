@@ -27,4 +27,15 @@ public class BallBehaviour : MonoBehaviour // A simple script to ignore sibling 
             Physics.IgnoreCollision(colliders[i], LocalCollider, IgnoreColliders);
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Car") || collision.gameObject.CompareTag("Player"))
+        {
+            Transform tempTransform = collision.transform;
+            Vector3 globalPositionOfContact = collision.contacts[0].point;
+            ParticleSystem pa = ParticleController.InstantiateOnLocation(ParticleController.Flame, globalPositionOfContact, tempTransform.rotation);
+            pa.transform.SetParent(tempTransform);
+        }
+    }
 }

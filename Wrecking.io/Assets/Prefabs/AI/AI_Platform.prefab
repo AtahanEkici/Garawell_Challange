@@ -393,7 +393,6 @@ GameObject:
   - component: {fileID: 4941920892731107119}
   - component: {fileID: 4941920892731107118}
   - component: {fileID: 4941920892731107113}
-  - component: {fileID: 4941920892731107112}
   m_Layer: 0
   m_Name: AI_Platform
   m_TagString: Car
@@ -430,7 +429,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8c4792885c09fa4a8038cead3493217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
   Ball: {fileID: 0}
   BallBody: {fileID: 0}
   FollowSpeed: 5
@@ -549,22 +547,6 @@ MonoBehaviour:
   lr: {fileID: 0}
   StartPos: {fileID: 0}
   endPos: {fileID: 0}
---- !u!54 &4941920892731107112
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4941920892731107115}
-  serializedVersion: 2
-  m_Mass: 0.0000001
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 3
 --- !u!1 &4941920892881825161
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,14 +722,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4941920893068260332}
   serializedVersion: 2
-  m_Mass: 50
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 2
+  m_CollisionDetection: 3
 --- !u!114 &4941920893068260307
 MonoBehaviour:
   m_ObjectHideFlags: 0

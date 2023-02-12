@@ -8,6 +8,9 @@ public class LevelManager : MonoBehaviour
 
     private static readonly string AssetLocation = "Assets/Prefabs/AI";
 
+    [Header("Spawn Positions")]
+    [SerializeField] private Vector3[] SpawnLocations;
+
     [Header("Spawn Options")]
     [SerializeField] private GameObject AI_Platforms;
     [SerializeField] Vector3 spawnVector = Vector3.zero;
@@ -33,13 +36,14 @@ public class LevelManager : MonoBehaviour
     }
     private void SpawnObjects()
     {
-        for(int i=0;i<SpawnAmount;i++)
+        SpawnLocations = new Vector3[SpawnAmount];
+
+        for (int i=0;i<SpawnAmount;i++)
         {
-            spawnVector = (Random.insideUnitCircle * FieldScale) / 2;
-            Debug.Log(spawnVector);
+            spawnVector = (Random.insideUnitCircle * FieldScale) / 3;
             spawnVector.z = spawnVector.y;
             spawnVector.y = SpawnHeight;
-            Debug.Log(spawnVector);
+            SpawnLocations[i] = spawnVector;
             Instantiate(AI_Platforms, spawnVector, spawnRotation);
         }
     }
@@ -74,14 +78,17 @@ public class LevelManager : MonoBehaviour
         if(Cars.Count <= 1)
         {
             Winner = Cars[0];
-            Debug.Log("The Winner is : " + Winner + "");
-            // GameOver ?
+
+            if(Winner.CompareTag("Player"))
+            {
+                GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+                gm.GameOver();
+            }
         }
     }
     private void GetAsset()
     {
         string[] Files = Directory.GetFiles(AssetLocation,ShowTouch.AssetFileExtension);
-        Debug.Log(Files[0]);
         AI_Platforms = (GameObject)AssetDatabase.LoadAssetAtPath(Files[0], typeof(GameObject));
     }
 }

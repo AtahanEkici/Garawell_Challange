@@ -1,20 +1,23 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
 
+    private static readonly string GameOverTag = "GameOverCanvas";
+
     [Header("Outside References")]
     [SerializeField] private LevelManager levelman;
     [SerializeField] private GameObject GameOverCanvas;
+    [SerializeField] private GameObject TouchCanvas;
+    [SerializeField] private Button RestartButton;
     private void Awake()
     {
         CheckInstance();
+        GameOverCanvas = GameObject.FindGameObjectWithTag(GameOverTag);
+        GameOverCanvas.SetActive(false);
     }
-    private void Start()
-    {
-        
-    }
-
     private void CheckInstance()
     {
         if (_instance != null && _instance != this)
@@ -26,22 +29,20 @@ public class GameManager : MonoBehaviour
             _instance = this;
         }
     }
-    public void Start_Game()
+    public void Restart()
     {
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
+        //Application.LoadLevel(Application.loadedLevel);
     }
     public static void Quit_Game()
     {
         Application.Quit();
     }
-    public static void GameOver()
+    public void GameOver()
     {
         Time.timeScale = 0;
-        // Game Over Screen
-    }
-    public static void Restart()
-    {
-
+        TouchCanvas.SetActive(false);
+        GameOverCanvas.SetActive(true);
     }
     public static void V_Sync()
     {
@@ -54,7 +55,7 @@ public class GameManager : MonoBehaviour
             QualitySettings.vSyncCount = 1;
         }
     }
-    public void Force_Frame_Rate(int given_frame_rate)
+    public static void Force_Frame_Rate(int given_frame_rate)
     {
         Application.targetFrameRate = given_frame_rate;
     }

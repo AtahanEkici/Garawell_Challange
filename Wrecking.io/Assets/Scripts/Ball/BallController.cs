@@ -1,8 +1,6 @@
 using UnityEngine;
 public class BallController : MonoBehaviour
 {
-    [Header("Local Rigidbody")]
-    [SerializeField] private Rigidbody rb;
 
     [Header("Ball Info")]
     [SerializeField] private Transform Ball;
@@ -18,8 +16,6 @@ public class BallController : MonoBehaviour
         Ball = transform.GetChild(0).GetComponent<Transform>();
         BallBody = Ball.gameObject.GetComponent<Rigidbody>();
         DesiredLocation = transform.GetChild(1).GetChild(2).GetComponent<Transform>();
-        rb = GetComponent<Rigidbody>();
-        rb.detectCollisions = false;
     }
     private void FixedUpdate()
     {

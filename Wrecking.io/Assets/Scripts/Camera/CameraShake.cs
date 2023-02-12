@@ -9,9 +9,11 @@ public class CameraShake : MonoBehaviour
     float traumaExponent = 1;
     [SerializeField]
     float recoverySpeed = 1;
+
     private float trauma;
     private float seed;
     private float frequency = 25;
+
     private static CameraShake _instance;
     private void Awake()
     {
@@ -52,7 +54,7 @@ public class CameraShake : MonoBehaviour
     {
         if (_instance != null && _instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(this);
         }
         else
         {

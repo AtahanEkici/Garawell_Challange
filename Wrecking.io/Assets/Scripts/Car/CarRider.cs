@@ -20,6 +20,9 @@ public class CarRider : MonoBehaviour
     [SerializeField] public float maxMotorTorque;
     [SerializeField] public float maxSteeringAngle;
     [SerializeField] public float maxBrakeTorque;
+
+    [Header("Camera Shaker")]
+    [SerializeField] private CameraShake camShake;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -28,6 +31,10 @@ public class CarRider : MonoBehaviour
         GetWheelColliders();
         Instance_ID = gameObject.GetInstanceID();
         LevelManager.AddList(gameObject);
+    }
+    private void Start()
+    {
+        camShake = Camera.main.transform.parent.GetComponentInChildren<CameraShake>();
     }
     private void FixedUpdate()
     {
@@ -84,6 +91,8 @@ public class CarRider : MonoBehaviour
     private void OnDestroy()
     {
         LevelManager.RemoveFromList(Instance_ID);
+        GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gm.GameOver();
     }
 }
 [System.Serializable]

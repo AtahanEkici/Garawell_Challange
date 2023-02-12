@@ -12,6 +12,9 @@ TagManager:
   - Ball
   - SpinButton
   - AI
+  - Particle
+  - GameOverCanvas
+  - GameManager
   layers:
   - Default
   - TransparentFX

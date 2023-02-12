@@ -18,7 +18,7 @@ public class CarAIController : MonoBehaviour
 
     [Header("Attack Info")]
     [SerializeField] private bool CanAttack = true;
-    [SerializeField] private float AttackDistance = 5f;
+    [SerializeField] private float AttackDistance = 4.5f;
     [SerializeField] private float AttackCoolDown = 2f;
     [SerializeField] private float AttackTimer = 0f;
 
@@ -35,7 +35,9 @@ public class CarAIController : MonoBehaviour
     {
         Instance_ID = gameObject.GetInstanceID();
         LevelManager.AddList(gameObject);
-        LocalSpin = GetComponent<Spin>();    
+        LocalSpin = GetComponent<Spin>();
+        AttackDistance = 4.5f + Random.Range(0, 1);
+        AttackCoolDown +=  AttackCoolDown * Random.Range(0, 1);
     }
     private void Start()
     {
@@ -57,16 +59,18 @@ public class CarAIController : MonoBehaviour
     }
     private void AttackTarget()
     {
-        if (Target == null) { return; }
-        if(CanAttack == false) { AttackTimer += Time.deltaTime;  return; }
+        if(CanAttack == false) 
+        { 
+            AttackTimer += Time.deltaTime;
 
-        if(AttackTimer >= AttackCoolDown)
-        {
-            CanAttack = true;
-            AttackTimer = 0f;
+            if (AttackTimer >= AttackCoolDown)
+            {
+                CanAttack = true;
+                AttackTimer = 0f;
+            }
         }
 
-        if (TargetDistance < AttackDistance)
+        if (TargetDistance < AttackDistance && CanAttack)
         {
             LocalSpin.SpinAI();
             CanAttack = false;
@@ -81,6 +85,7 @@ public class CarAIController : MonoBehaviour
 
         frontLeftWheel.steerAngle = steer * maxSteerAngle;
         frontRightWheel.steerAngle = steer * maxSteerAngle;
+
         rearLeftWheel.motorTorque = targetSpeed - steer;
         rearRightWheel.motorTorque = targetSpeed + steer;
     }
